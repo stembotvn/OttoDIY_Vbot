@@ -29,11 +29,12 @@ FOOT_R D5==> -----   ------  <== FOOT_L -> D4
 
 Otto Vbot;  //my name is Vbot! Hello World!
 //---------------------------------------------------------
+/*
 #define HIP_L   2        // connect Servo Hip left to D2
 #define FOOT_L  4        // Connect Servo Foot Left to D4
 #define HIP_R   3        // Connect Servo Hip right to D3
 #define FOOT_R  5        // COnnect Servo Foot Right to D5
-
+*/
 
 
 
@@ -73,7 +74,7 @@ void setup(){
   Serial.begin(9600);
   
   Vbot.init(HIP_L, HIP_R, FOOT_L, FOOT_R, false, PIN_NoiseSensor, PIN_Buzzer,PIN_Trigger, PIN_Echo);  
-  // [No calibrate home position] [ SRF04 Echo to D9, Trigger to D8 ] [ Buzzer to D10(High level active)]
+  // [No calibrate home position] [ SRF04 Echo to D9, Trigger to D10 ] [ Buzzer to D11(High level active)]
 
 
   //Set a random seed

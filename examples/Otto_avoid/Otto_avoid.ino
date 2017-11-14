@@ -23,15 +23,17 @@ FOOT_R D5==> -----   ------  <== FOOT_L -> D4
 
 Otto Vbot;  //my name is Vbot! Hello World!
 //---------------------------------------------------------
+/*
 #define HIP_L   2        // connect Servo Hip left to D2
 #define FOOT_L  4        // Connect Servo Foot Left to D4
 #define HIP_R   3        // Connect Servo Hip right to D3
 #define FOOT_R  5        // COnnect Servo Foot Right to D5
+*/
 ///////////////////////////////////////////////////////////////////
 //-- Global Variables -------------------------------------------//
 ///////////////////////////////////////////////////////////////////
 
-//---------------------------------------------------------
+//-----------------------------------------------------------------
 ///////////////////////////////////////////////////////////////////
 //-- Setup ------------------------------------------------------//
 ///////////////////////////////////////////////////////////////////
@@ -51,7 +53,7 @@ void setup(){
 void loop() {
   if (Vbot.getDistance()<15) { 
                Vbot.sing(S_surprise); 
-               Vbot.playGesture(VbotFretful); 
+               Vbot.playGesture(OttoFretful); 
                Vbot.sing(S_fart3); 
                Vbot.walk(2,1300,-1); 
                Vbot.turn(2,1000,-1);                
