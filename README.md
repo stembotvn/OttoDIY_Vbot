@@ -11,7 +11,7 @@ You can do it yours
 Just download Zip File and add manually by: Arduino/Sketch/Include Library/Add Zip Library 
 After installing Library, go to Files/Examples/otto and can upload the demo programms. 
 
-## Hardware
+## Hardware (Basically same OttoDIY project)
 - connect Servo Hip left to D2
 - Connect Servo Foot Left to D4
 - Connect Servo Hip right to D3
@@ -21,11 +21,21 @@ After installing Library, go to Files/Examples/otto and can upload the demo prog
 - HO06Tx to Arduino Rx(D7)
 - SRF04 Trigger to D10
 - SRF04 Echo    To D9
-- Sound Sensor  to A6
+- Sound Sensor  to A6 (if any)
 ## Scratch Programming in mBlock for Scratch Mode 
-- Upload Example file: Otto_Mblock_ScratchMode_Serial.ino to the Otto 
-- Download mBlock Desktop Software here: http://www.mblock.cc/software/mblock/mblock3/
-- Install Extension for Otto: 
+Install mBlock Extension for OttoDIY: https://github.com/stembotvn/OttoDIY_mBlock_Extension
+## Play with Zowi App (Android only) via Bluetooth
+- Zowi App is a great app for Otto learning especially suitable for +5 years old kids
+- Zowi App is develop for Zowi Robot (an perfect mixing with Otto) from BQ: https://www.bq.com/en/zowi
+- Install App on Android Phone (Search Zowi app in CHPlay): https://play.google.com/store/apps/details?id=com.bq.zowi&hl=en
+- Upload firmware on Arduino IDE: "Examples/otto/HC06_BT_config" to configure the Bluetooth HC06 module for compatible with Zowi App https://github.com/stembotvn/OttoDIY_Vbot/tree/master/examples/HC06_BT_config
+- Upload firmware on Arduino IDE: "Examples/otto/Otto_BT_ZowiAPP.ino  for enjoy Zowi App with your Otto. 
+- For experience with Zowi App, refer here: http://zowi.bq.com/en/parents-teachers/
+- Pairing the Bluetooth Module with Android device, the name of module will be "Zowi", Passcode is 1234
+- in Zowi App, the App will Search, detect and connect the Robot.  
+
+
+
 
 
 
