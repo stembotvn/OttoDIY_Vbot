@@ -16,7 +16,7 @@ After installing Library, go to Files/Examples/otto and can upload the demo prog
 - Connect Servo Foot Left to D4
 - Connect Servo Hip right to D3
 - COnnect Servo Foot Right to D5
-- Buzzer to D10 (Active High)
+- Buzzer to D11 (Active High)
 - HC06Rx to Arduino Tx(D8)
 - HO06Tx to Arduino Rx(D7)
 - SRF04 Trigger to D10
@@ -26,6 +26,7 @@ After installing Library, go to Files/Examples/otto and can upload the demo prog
 - Upload Example file: Otto_Mblock_ScratchMode_Serial.ino to the Otto 
 - Download mBlock Desktop Software here: http://www.mblock.cc/software/mblock/mblock3/
 - Install Extension for Otto: 
+
 
 
 
