@@ -16,10 +16,10 @@ After installing Library, go to Files/Examples/otto and can upload the demo prog
 - Connect Servo Foot Left to D4
 - Connect Servo Hip right to D3
 - COnnect Servo Foot Right to D5
-- Buzzer to D11 (Active High)
-- HC06Rx to Arduino Tx(D8)
-- HO06Tx to Arduino Rx(D7)
-- SRF04 Trigger to D10
+- Buzzer to D10 (Active High)
+- HC06Rx to Arduino Tx(D7)
+- HO06Tx to Arduino Rx(D6)
+- SRF04 Trigger to 8
 - SRF04 Echo    To D9
 - Sound Sensor  to A6 (if any)
 ## Scratch Programming in mBlock for Scratch Mode 
