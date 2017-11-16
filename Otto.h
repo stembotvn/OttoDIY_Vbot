@@ -28,12 +28,12 @@
 #define HIP_R   3        // Connect Servo Hip right to D3
 #define FOOT_R  5        // COnnect Servo Foot Right to D5
 
-#define PIN_Buzzer  11
-#define PIN_Trigger 10
+#define PIN_Buzzer  10
+#define PIN_Trigger 8
 #define PIN_Echo    9
 #define PIN_NoiseSensor A6
-#define BT_Rx   7  
-#define BT_Tx   8
+#define BT_Rx   6  
+#define BT_Tx   7
 
 class Otto
 {
