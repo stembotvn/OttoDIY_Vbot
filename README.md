@@ -22,7 +22,7 @@ After installing Library, go to Files/Examples/otto and can upload the demo prog
 - SRF04 Trigger to 8
 - SRF04 Echo    To D9
 - Sound Sensor  to A6 (if any)
-## Scratch Programming in mBlock for Scratch Mode 
+## Scratch Programming in mBlock 
 Install mBlock Extension for OttoDIY: https://github.com/stembotvn/OttoDIY_mBlock_Extension
 ## Play with Zowi App (Android only) via Bluetooth
 - Zowi App is a great app for Otto learning especially suitable for +5 years old kids
