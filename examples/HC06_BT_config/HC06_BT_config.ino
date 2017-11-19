@@ -25,7 +25,7 @@ Created by Hien Phan, Aug 2017
 	char baudios		 = '4';		   // 1=>1200 baudios, 2=>2400, 3=>4800, 4=>9600 (default), 5=>19200, 6=>38400, 7=>57600, 8=>115200
 	char password[10]	= "1234";		// Password for pairing
 	
-SoftwareSerial BT(8,7); //RX,TX
+SoftwareSerial BT(6,7); //RX,TX
 void setup()
 {
 	BT.begin(9600);		//9600bauds is the deafult baudrate for these modules.
