@@ -3,7 +3,7 @@
 FIRMWARE TO CONFIG HC 06 FOR COMPATIBLE ZOWI APP
 After upload code you have 10 seconds to connect the module
 HC06---- Arduino
-TX ----> RX (D8)
+TX ----> RX (D6)
 RX <---- TX (D7)
 Turn on  Serial MOnitor (Baud: 9600) to view Process, if configuration unsuccess, please try another baurate
 Once the LED off configuration will start and at the end LED will blink
