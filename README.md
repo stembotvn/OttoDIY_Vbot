@@ -11,17 +11,24 @@ You can do it yours
 Just download Zip File and add manually by: Arduino/Sketch/Include Library/Add Zip Library 
 After installing Library, go to Files/Examples/otto and can upload the demo programms. 
 
-## Hardware (Basically same OttoDIY project)
+## Hardware (Basically same OttoDIY Plus Matrix project)
 - connect Servo Hip left to D2
 - Connect Servo Foot Left to D4
 - Connect Servo Hip right to D3
 - COnnect Servo Foot Right to D5
-- Buzzer to D10 (Active High)
+- Buzzer to D13 (Active High)
 - HC06Rx to Arduino Tx(D7)
 - HO06Tx to Arduino Rx(D6)
-- SRF04 Trigger to 8
+- SRF04 Trigger to D8
 - SRF04 Echo    To D9
-- Sound Sensor  to A6 (if any)
+- Max7219   DATA    12   //for LED matrix Mouth
+- Max7219   CS    10
+- Max7219  CLK    11
+- Sound Sensor  to analog A6, 
+- Light sensor Left to analog A1
+- Light Sensor Right to analog A0
+- Button 1    to A2 in pull up input (low active: connect A2 to Gnd) 
+- Button 2    to A3 in pull up input(low active: connect A3 to Gnd)
 ## Scratch Programming in mBlock 
 Install mBlock Extension for OttoDIY: https://github.com/stembotvn/OttoDIY_mBlock_Extension
 ## Play with Zowi App (Android only) via Bluetooth
