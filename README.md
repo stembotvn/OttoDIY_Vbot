@@ -30,9 +30,9 @@ After installing Library, go to Files/Examples/otto and can upload the demo prog
 - Button 1    to A2 in pull up input (low active: connect A2 to Gnd) 
 - Button 2    to A3 in pull up input(low active: connect A3 to Gnd)
 ## Scratch Programming in mBlock 
-Download mBlock software: http://www.mblock.cc/
-Install mBlock Extension for OttoDIY: https://github.com/stembotvn/OttoDIY_mBlock_Extension
-See demo video for installation: https://www.youtube.com/watch?v=lPDUmW9uHto&t=59s
+ - Download mBlock software: http://www.mblock.cc/
+ - Install mBlock Extension for OttoDIY: https://github.com/stembotvn/OttoDIY_mBlock_Extension
+ - See demo video for installation: https://www.youtube.com/watch?v=lPDUmW9uHto&t=59s
 ## Play with Zowi App (Android only) via Bluetooth
 - Zowi App is a great app for Otto learning especially suitable for +5 years old kids
 - Zowi App is develop for Zowi Robot (an perfect mixing with Otto) from BQ: https://www.bq.com/en/zowi
