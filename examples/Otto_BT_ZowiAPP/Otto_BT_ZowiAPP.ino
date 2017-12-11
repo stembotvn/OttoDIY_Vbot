@@ -12,7 +12,7 @@
 //       Trigger D8
 //Servo: D2,D3,D4,D5 
 //HC06   Tx  ----> Rx (D7) Arduino
-//       Rx  ----> Tx (D8) Arduino
+//       Rx  ----> Tx (D6) Arduino
 //Sound  A6
 //
 //-----------------------------------------------------------------
