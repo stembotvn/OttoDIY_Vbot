@@ -18,7 +18,7 @@ After installing Library, go to Files/Examples/otto and can upload the demo prog
 - COnnect Servo Foot Right to D5
 - Buzzer to D13 (Active High)
 - HC06Rx to Arduino Tx(D7)
-- HO06Tx to Arduino Rx(D6)
+- HC06Tx to Arduino Rx(D6)
 - SRF04 Trigger to D8
 - SRF04 Echo    To D9
 - Max7219   DATA    D10   //for LED matrix Mouth
