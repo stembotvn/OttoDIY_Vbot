@@ -4,7 +4,7 @@ http://ottodiy.com
 You can do it yours 
 ## About this Library
 - I mixed with some changes, by Arrange all C++ files in 1 library so it is easy to install in Arduino. 
-- Modify to use with Bluetooth HC06 in SoftwareSerial, so you can upload code without removing the HC06 Module as using HC06 in Hardware Serial
+- Modify to use with Bluetooth HC06 in SoftwareSerial, so you can upload code without removing the HC06 Module 
 - Can Programming the Otto in Scratch Language using mBlock software (Both Arduino mode and Scratch Mode)
 
 ## Installation
