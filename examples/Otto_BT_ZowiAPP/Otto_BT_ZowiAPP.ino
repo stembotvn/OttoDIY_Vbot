@@ -7,10 +7,6 @@
 // This Firmware also compatible with Mblock SoftWare in Scratch Mode via Bluetooth(using online programming in Scratch Language, must always connect to PC to programming and run)
 //Suitable for kids from 5-15 years old - Enjoy 
 //Hardware: Arduino Nano 
-//Buzzer: D10
-//SRF04: Echo D9
-//       Trigger D8
-//Servo: D2,D3,D4,D5 
 //HC06   Tx  ----> Rx (D6) Arduino
 //       Rx  ----> Tx (D7) Arduino
 //Sound  A6
