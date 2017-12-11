@@ -12,23 +12,27 @@ Just download Zip File and add Library manually by: Arduino/Sketch/Include Libra
 After installing Library, go to Files/Examples/otto and can upload the demo programms. 
 
 ## Hardware (Basically same OttoDIY Plus Matrix project)
-- connect Servo Hip left to D2
-- Connect Servo Foot Left to D4
-- Connect Servo Hip right to D3
-- COnnect Servo Foot Right to D5
-- Buzzer to D13 (Active High)
-- HC06Rx to Arduino Tx(D7)
-- HC06Tx to Arduino Rx(D6)
-- SRF04 Trigger to D8
-- SRF04 Echo    To D9
-- Max7219   DATA    D10   //for LED matrix Mouth
-- Max7219   CS    D11
-- Max7219  CLK    D12
-- Sound Sensor  to analog A6, 
-- Light sensor Left to analog A1
-- Light Sensor Right to analog A0
-- Button 1    to A2 in pull up input (low active: connect A2 to Gnd) 
-- Button 2    to A3 in pull up input(low active: connect A3 to Gnd)
+<img src="https://github.com/stembotvn/OttoDIY_mBlock_Extension/blob/master/media/connection.png" width="500" align="center">
+
+ |  Component             | Arduino Pin |
+ | --- | --- |
+ |  Servo Hip left        | D2          |
+ |  Servo Foot Left       | D4          |
+ |  Servo Hip right       | D3          |
+ |  Servo Foot right| D5|
+ |  Buzzer          | D13|
+ |Bluetooth HC06 Rx | D7|
+ |Bluetooth HC06 Tx | D6|
+ |SRF04 Trigger     | D8|
+ |SRF04 Echo        | D9|
+ |Max7219 LedMatrix Data | D10|
+ |Max7219 LedMatrix CS   | D11|
+ |Max7219 LedMatrix Clk  | D12|
+ |Analog Sound Sensor Module|A6|
+ |Button 1                  |A2|
+ |Button 2                  |A3|
+ |Light sensor Module (RIGHT) Analog output Pin|A0|
+ |Light Sensor Module (LEFT) Analog output Pin|A1|
 ## Scratch Programming in mBlock 
  - Download mBlock software: http://www.mblock.cc/
  - Install mBlock Extension for OttoDIY: https://github.com/stembotvn/OttoDIY_mBlock_Extension
