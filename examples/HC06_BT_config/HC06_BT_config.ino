@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 /* 
 
 FIRMWARE TO CONFIG HC 06 FOR COMPATIBLE ZOWI APP
@@ -152,5 +152,5 @@ void waitResponse()
    Serial.println(command);  
 
 
->>>>>>> origin/master
+
 }
