@@ -7,8 +7,12 @@
 // This Firmware also compatible with Mblock SoftWare in Scratch Mode via Bluetooth(using online programming in Scratch Language, must always connect to PC to programming and run)
 //Suitable for kids from 5-15 years old - Enjoy 
 //Hardware: Arduino Nano 
-//HC06   Tx  ----> Rx (D6) Arduino
-//       Rx  ----> Tx (D7) Arduino
+//Buzzer: D10
+//SRF04: Echo D9
+//       Trigger D8
+//Servo: D2,D3,D4,D5 
+//HC06   Tx  ----> Rx (D7) Arduino
+//       Rx  ----> Tx (D8) Arduino
 //Sound  A6
 //
 //-----------------------------------------------------------------
@@ -72,9 +76,10 @@ void setup(){
   //Serial communication initialization
   BT.begin(9600);  //init for Bluetooth HC-06 interface via Software Serial 
   Serial.begin(9600); //init for Serial interface for Debug data in PC 
+  Vbot.setTrims(0,0,0,0);
+  Vbot.saveTrimsOnEEPROM(); // NOTE: comment out this line if you are using calibration function from Zowi App
+  Vbot.init(HIP_L, HIP_R, FOOT_L, FOOT_R, true, PIN_NoiseSensor, PIN_Buzzer,PIN_Trigger, PIN_Echo);  
   
-  Vbot.init(HIP_L, HIP_R, FOOT_L, FOOT_R, false, PIN_NoiseSensor, PIN_Buzzer,PIN_Trigger, PIN_Echo);  
-  // [No calibrate home position] [ SRF04 Echo to D9, Trigger to D10 ] [ Buzzer to D11(High level active)]
 
   randomSeed(analogRead(A6));
 
@@ -218,9 +223,42 @@ void receiveTrims(){
     //sendAck & stop if necessary
     sendAck();
     Vbot.home(); 
-    Vbot.sing(S_confused);
-    //Vbot.playGesture(RobotConfused);// Indicate that Function not availabe for this version
+
+    int trim_YL,trim_YR,trim_RL,trim_RR;
+
+    //Definition of Servo Bluetooth command
+    //C trim_YL trim_YR trim_RL trim_RR
+    //Examples of receiveTrims Bluetooth commands
+    //C 20 0 -8 3
+    bool error = false;
+    char *arg;
+    arg=SCmd.next();
+    if (arg != NULL) { trim_YL=atoi(arg); }    // Converts a char string to an integer   
+    else {error=true;}
+
+    arg = SCmd.next(); 
+    if (arg != NULL) { trim_YR=atoi(arg); }    // Converts a char string to an integer  
+    else {error=true;}
+
+    arg = SCmd.next(); 
+    if (arg != NULL) { trim_RL=atoi(arg); }    // Converts a char string to an integer  
+    else {error=true;}
+
+    arg = SCmd.next(); 
+    if (arg != NULL) { trim_RR=atoi(arg); }    // Converts a char string to an integer  
+    else {error=true;}
     
+    if(error==true){
+
+      delay(2000);
+
+    }else{ //Save it on EEPROM
+      Vbot.setTrims(trim_YL, trim_YR, trim_RL, trim_RR);
+      Vbot.saveTrimsOnEEPROM(); 
+      Serial.println("Save offset to EEROM");
+    } 
+
+    sendFinalAck();   
 
 }
  
@@ -265,8 +303,10 @@ void receiveServo(){
       Vbot._moveServos(200, servoPos);   //Move 200ms
       
     }
-
+    Vbot.detachServos();
+    Vbot.setRestState(true);
     sendFinalAck();
+
 
 }
 
@@ -286,9 +326,9 @@ void receiveMovement(){
     arg = SCmd.next(); 
     if (arg != NULL) {moveId=atoi(arg); Serial.println(moveId); Serial.print(" ");}
     else{
-//      Vbot.putMouth(xMouth);
+      Vbot.putMouth(xMouth);
       delay(2000);
-  //    Vbot.clearMouth();
+      Vbot.clearMouth();
       moveId=0; //stop
     }
     
@@ -412,9 +452,9 @@ void receiveGesture(){
     if (arg != NULL) {gesture=atoi(arg);}
     else 
     {
-      //Vbot.putMouth(xMouth);
+      Vbot.putMouth(xMouth);
       delay(2000);
-      //Vbot.clearMouth();
+      Vbot.clearMouth();
     }
 
     switch (gesture) {
@@ -583,7 +623,34 @@ void receiveName(){
   //  sendFinalAck();
 
 }
+////
+//-- Function to receive LED Matrix data
+void receiveLED(){  
 
+    //sendAck & stop if necessary
+    sendAck();
+    Vbot.home();
+
+    //Examples of receiveLED Bluetooth commands
+    //L 000000001000010100100011000000000
+    //L 001111111111111111111111111111111 (todos los LED encendidos)
+    unsigned long int matrix;
+    char *arg;
+    char *endstr;
+    arg=SCmd.next();
+    //Serial.println (arg);
+    if (arg != NULL) {
+      matrix=strtoul(arg,&endstr,2);    // Converts a char string to unsigned long integer
+      Vbot.putMouth(matrix,false);
+    }else{
+      Vbot.putMouth(xMouth);
+      delay(2000);
+      Vbot.clearMouth();
+    }
+
+    sendFinalAck();
+
+}
 
 //-- Function to send Vbot's name
 void requestName(){

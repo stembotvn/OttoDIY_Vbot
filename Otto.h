@@ -3,7 +3,7 @@
 
 #include <Servo.h>
 #include "Oscillator.h"
-//#include <EEPROM.h>
+#include <EEPROM.h>
 
 #include "US.h"
 #include "MaxMatrix.h"
@@ -13,7 +13,7 @@
 #include "Otto_sounds.h"
 #include "Otto_gestures.h"
 #include "SoftSerialCommand.h"
-
+#include "OttoSerialCommand.h"
 //-- Constants
 #define FORWARD     1
 #define BACKWARD    -1
@@ -51,8 +51,8 @@ class Otto
     void detachServos();
 
     //-- Oscillator Trims
-    //  void setTrims(int YL, int YR, int RL, int RR);
-    // void saveTrimsOnEEPROM();
+     void setTrims(int YL, int YR, int RL, int RR);
+     void saveTrimsOnEEPROM();
 
     //-- Predetermined Motion Functions
     void _moveServos(int time, int  servo_target[]);
