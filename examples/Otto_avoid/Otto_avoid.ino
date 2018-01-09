@@ -39,7 +39,7 @@ Otto Vbot;  //my name is Vbot! Hello World!
 ///////////////////////////////////////////////////////////////////
 void setup(){
   //Set the servo pins
-  Vbot.init(HIP_L, HIP_R, FOOT_L, FOOT_R, false, PIN_NoiseSensor, PIN_Buzzer,PIN_Trigger, PIN_Echo);  
+  Vbot.init(HIP_L, HIP_R, FOOT_L, FOOT_R, true, PIN_NoiseSensor, PIN_Buzzer,PIN_Trigger, PIN_Echo);  
   // [No calibrate home position] [ SRF04 Echo to D9, Trigger to D8 ] [ Buzzer to D10(High level active)]
 
   Vbot.sing(S_connection); //Vbot wake up!
