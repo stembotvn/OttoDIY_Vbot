@@ -77,7 +77,7 @@ void setup(){
   BT.begin(9600);  //init for Bluetooth HC-06 interface via Software Serial 
   Serial.begin(9600); //init for Serial interface for Debug data in PC 
   Vbot.setTrims(0,0,0,0);
-  Vbot.saveTrimsOnEEPROM(); // NOTE: comment out this line if you are using calibration function from Zowi App
+ // Vbot.saveTrimsOnEEPROM(); // NOTE: comment out this line if you are using calibration function from Zowi App
   Vbot.init(HIP_L, HIP_R, FOOT_L, FOOT_R, true, PIN_NoiseSensor, PIN_Buzzer,PIN_Trigger, PIN_Echo);  
   
 
@@ -168,17 +168,6 @@ void receiveStop(){
 }
 
 
-//-- Function to receive LED commands
-void receiveLED(){  
-
-    //sendAck & stop if necessary
-    sendAck();
-    Vbot.home();
-     //put some code for deny (not available)
-   
-    sendFinalAck();
-
-}
 
 
 //-- Function to receive buzzer commands
