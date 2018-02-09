@@ -7,12 +7,12 @@
 // This Firmware also compatible with Mblock SoftWare in Scratch Mode via Bluetooth(using online programming in Scratch Language, must always connect to PC to programming and run)
 //Suitable for kids from 5-15 years old - Enjoy 
 //Hardware: Arduino Nano 
-//Buzzer: D10
+//Buzzer: D13
 //SRF04: Echo D9
 //       Trigger D8
 //Servo: D2,D3,D4,D5 
 //HC06   Tx  ----> Rx (D7) Arduino
-//       Rx  ----> Tx (D8) Arduino
+//       Rx  ----> Tx (D6) Arduino
 //Sound  A6
 //
 //-----------------------------------------------------------------
@@ -22,7 +22,7 @@
 #include "SoftSerialCommand.h"
 
 
-SoftwareSerial BT = SoftwareSerial(BT_Rx,BT_Tx); // Set Up Bluetooth connection on SoftwareSerial (Tx is D8, Rx is D7 in Arduino Side)  
+SoftwareSerial BT = SoftwareSerial(BT_Tx,BT_Rx); // Set Up Bluetooth connection on SoftwareSerial (Tx is D7, Rx is D6 in Arduino Side)  
 SoftSerialCommand SCmd(BT); //The SerialCommand object
 
 //---------------------------------------------------------
@@ -76,7 +76,7 @@ void setup(){
   //Serial communication initialization
   BT.begin(9600);  //init for Bluetooth HC-06 interface via Software Serial 
   Serial.begin(9600); //init for Serial interface for Debug data in PC 
-  Vbot.setTrims(0,0,0,0);
+ // Vbot.setTrims(0,0,0,0);
  // Vbot.saveTrimsOnEEPROM(); // NOTE: comment out this line if you are using calibration function from Zowi App
   Vbot.init(HIP_L, HIP_R, FOOT_L, FOOT_R, true, PIN_NoiseSensor, PIN_Buzzer,PIN_Trigger, PIN_Echo);  
   
@@ -105,7 +105,7 @@ void setup(){
   Vbot.home();
   delay(50);
   Serial.println("Zowi Started");
- 
+  
   //Send Vbot name, programID & battery level.
   requestName();
   delay(50);
@@ -116,6 +116,7 @@ void setup(){
   
   //Checking battery
   LowBatteryAlarm();
+  Vbot.playGesture(OttoHappy);
    Vbot.sing(S_happy);
     delay(200);
  
