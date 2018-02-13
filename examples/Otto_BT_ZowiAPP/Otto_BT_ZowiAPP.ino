@@ -2,7 +2,7 @@
 //Firmware using SoftwareSerial for Bluetooth Interface 
 //Otto firmware for compatible with Bluetooth Zowi App (Android Only) and Scratch via Bluetooth
 //Mixed from OttoDIY and Zowi 
-//Comatible with Zowi APP, a very fun Smartphone app for programming Zowi Vbot
+//Comatible with Zowi APP, a very fun Smartphone app for programming Zowi Ottobot
 //Link Android APP: https://play.google.com/store/apps/details?id=com.bq.
 // This Firmware also compatible with Mblock SoftWare in Scratch Mode via Bluetooth(using online programming in Scratch Language, must always connect to PC to programming and run)
 //Suitable for kids from 5-15 years old - Enjoy 
@@ -38,7 +38,7 @@ FOOT_R D5==> -----   ------  <== FOOT_L -> D4
             |-----   ------|
 */
 
-Otto Vbot;  //my name is Vbot! Hello World!
+Otto Ottobot;  //my name is Ottobot! Hello World!
 //---------------------------------------------------------
 /*
 #define HIP_L   2        // connect Servo Hip left to D2
@@ -76,9 +76,9 @@ void setup(){
   //Serial communication initialization
   BT.begin(9600);  //init for Bluetooth HC-06 interface via Software Serial 
   Serial.begin(9600); //init for Serial interface for Debug data in PC 
- // Vbot.setTrims(0,0,0,0);
- // Vbot.saveTrimsOnEEPROM(); // NOTE: comment out this line if you are using calibration function from Zowi App
-  Vbot.init(HIP_L, HIP_R, FOOT_L, FOOT_R, true, PIN_NoiseSensor, PIN_Buzzer,PIN_Trigger, PIN_Echo);  
+ // Ottobot.setTrims(0,0,0,0);
+ // Ottobot.saveTrimsOnEEPROM(); // NOTE: comment out this line if you are using calibration function from Zowi App
+  Ottobot.init(HIP_L, HIP_R, FOOT_L, FOOT_R, true, PIN_NoiseSensor, PIN_Buzzer,PIN_Trigger, PIN_Echo);  
   
 
   randomSeed(analogRead(A6));
@@ -100,13 +100,13 @@ void setup(){
   SCmd.addCommand("I", requestProgramId);
   SCmd.addDefaultHandler(receiveStop);
 
-  //Vbot wake up!
-  Vbot.sing(S_connection);
-  Vbot.home();
+  //Ottobot wake up!
+  Ottobot.sing(S_connection);
+  Ottobot.home();
   delay(50);
   Serial.println("Zowi Started");
   
-  //Send Vbot name, programID & battery level.
+  //Send Ottobot name, programID & battery level.
   requestName();
   delay(50);
   requestProgramId();
@@ -116,8 +116,8 @@ void setup(){
   
   //Checking battery
   LowBatteryAlarm();
-  Vbot.playGesture(OttoHappy);
-   Vbot.sing(S_happy);
+  Ottobot.playGesture(OttoHappy);
+   Ottobot.sing(S_happy);
     delay(200);
  
 
@@ -131,12 +131,12 @@ void setup(){
 void loop() {
 
   if (BT.available() > 0) {
-   // Vbot.putMouth(happyOpen);
+   // Ottobot.putMouth(happyOpen);
   //  Serial.print(BT.read());
     SCmd.readSerial();
   
-    //If Vbot is moving yet
-    if (Vbot.getRestState()==false) {
+    //If Ottobot is moving yet
+    if (Ottobot.getRestState()==false) {
       move(moveId);
     }
   } 
@@ -149,7 +149,7 @@ void loop() {
 //-- Function to read distance sensor & to actualize obstacleDetected variable
 void obstacleDetector(){
 
-   int distance = Vbot.getDistance();
+   int distance = Ottobot.getDistance();
 
         if(distance<15){
           obstacleDetected = true;
@@ -163,7 +163,7 @@ void obstacleDetector(){
 void receiveStop(){
 
     sendAck();
-    Vbot.home();
+    Ottobot.home();
     sendFinalAck();
 
 }
@@ -176,7 +176,7 @@ void recieveBuzzer(){
   
     //sendAck & stop if necessary
     sendAck();
-    Vbot.home(); 
+    Ottobot.home(); 
 
     bool error = false; 
     int frec;
@@ -199,7 +199,7 @@ void recieveBuzzer(){
 
     }else{ 
 
-      Vbot._tone(frec, duration, 1);   
+      Ottobot._tone(frec, duration, 1);   
     }
 
     sendFinalAck();
@@ -212,7 +212,7 @@ void receiveTrims(){
 
     //sendAck & stop if necessary
     sendAck();
-    Vbot.home(); 
+    Ottobot.home(); 
 
     int trim_YL,trim_YR,trim_RL,trim_RR;
 
@@ -243,8 +243,8 @@ void receiveTrims(){
       delay(2000);
 
     }else{ //Save it on EEPROM
-      Vbot.setTrims(trim_YL, trim_YR, trim_RL, trim_RR);
-      Vbot.saveTrimsOnEEPROM(); 
+      Ottobot.setTrims(trim_YL, trim_YR, trim_RL, trim_RR);
+      Ottobot.saveTrimsOnEEPROM(); 
       Serial.println("Save offset to EEROM");
     } 
 
@@ -290,11 +290,11 @@ void receiveServo(){
     }else{ //Update Servo:
 
       int servoPos[4]={servo_YL, servo_YR, servo_RL, servo_RR}; 
-      Vbot._moveServos(200, servoPos);   //Move 200ms
+      Ottobot._moveServos(200, servoPos);   //Move 200ms
       
     }
-    Vbot.detachServos();
-    Vbot.setRestState(true);
+    Ottobot.detachServos();
+    Ottobot.setRestState(true);
     sendFinalAck();
 
 
@@ -306,8 +306,8 @@ void receiveMovement(){
 
     sendAck();
     Serial.print("Move Command: ");
-    if (Vbot.getRestState()==true){
-        Vbot.setRestState(false);
+    if (Ottobot.getRestState()==true){
+        Ottobot.setRestState(false);
     }
 
     //Definition of Movement Bluetooth commands
@@ -316,9 +316,9 @@ void receiveMovement(){
     arg = SCmd.next(); 
     if (arg != NULL) {moveId=atoi(arg); Serial.println(moveId); Serial.print(" ");}
     else{
-      Vbot.putMouth(xMouth);
+      Ottobot.putMouth(xMouth);
       delay(2000);
-      Vbot.clearMouth();
+      Ottobot.clearMouth();
       moveId=0; //stop
     }
     
@@ -343,77 +343,77 @@ void move(int moveId){
 
   switch (moveId) {
     case 0:
-      Vbot.home();
+      Ottobot.home();
       break;
     case 1: //M 1 1000 
-      Vbot.walk(1,T,1);
+      Ottobot.walk(1,T,1);
       break;
     case 2: //M 2 1000 
-      Vbot.walk(1,T,-1);
+      Ottobot.walk(1,T,-1);
       break;
     case 3: //M 3 1000 
-      Vbot.turn(1,T,1);
+      Ottobot.turn(1,T,1);
       break;
     case 4: //M 4 1000 
-      Vbot.turn(1,T,-1);
+      Ottobot.turn(1,T,-1);
       break;
     case 5: //M 5 1000 30 
-      Vbot.updown(1,T,30);
+      Ottobot.updown(1,T,30);
       break;
     case 6: //M 6 1000 30
 	  moveSize =30;
-      Vbot.moonwalker(1,T,moveSize,1);
+      Ottobot.moonwalker(1,T,moveSize,1);
       break;
     case 7: //M 7 1000 30
       moveSize =30;
-      Vbot.moonwalker(1,T,moveSize,-1);
+      Ottobot.moonwalker(1,T,moveSize,-1);
       break;
     case 8: //M 8 1000 30
 	  moveSize =30;
-      Vbot.swing(1,T,moveSize);
+      Ottobot.swing(1,T,moveSize);
       break;
     case 9: //M 9 1000 30 
 	  moveSize =30;
-      Vbot.crusaito(1,T,moveSize,1);
+      Ottobot.crusaito(1,T,moveSize,1);
       break;
     case 10: //M 10 1000 30
       moveSize =30;	
-      Vbot.crusaito(1,T,moveSize,-1);
+      Ottobot.crusaito(1,T,moveSize,-1);
       break;
     case 11: //M 11 1000 
-      Vbot.jump(1,T);
+      Ottobot.jump(1,T);
       break;
     case 12: //M 12 1000 30
 	  moveSize =30;
-      Vbot.flapping(1,T,moveSize,1);
+      Ottobot.flapping(1,T,moveSize,1);
       break;
     case 13: //M 13 1000 30
 	  moveSize =30;
-      Vbot.flapping(1,T,moveSize,-1);
+      Ottobot.flapping(1,T,moveSize,-1);
       break;
     case 14: //M 14 1000 20
 	  moveSize = 20;
-      Vbot.tiptoeSwing(1,T,moveSize);
+      Ottobot.tiptoeSwing(1,T,moveSize);
       break;
     case 15: //M 15 500 
-      Vbot.bend(1,T,1);
+      Ottobot.bend(1,T,1);
       break;
     case 16: //M 16 500 
-      Vbot.bend(1,T,-1);
+      Ottobot.bend(1,T,-1);
       break;
     case 17: //M 17 500 
-      Vbot.shakeLeg(1,T,1);
+      Ottobot.shakeLeg(1,T,1);
       break;
     case 18: //M 18 500 
-      Vbot.shakeLeg(1,T,-1);
+      Ottobot.shakeLeg(1,T,-1);
       break;
     case 19: //M 19 500 20
 	  moveSize =30;
-      Vbot.jitter(1,T,moveSize);
+      Ottobot.jitter(1,T,moveSize);
       break;
     case 20: //M 20 500 15
 	  moveSize =30;
-      Vbot.ascendingTurn(1,T,moveSize);
+      Ottobot.ascendingTurn(1,T,moveSize);
       break;
     default:
         manualMode = true;
@@ -432,7 +432,7 @@ void receiveGesture(){
 
     //sendAck & stop if necessary
     sendAck();
-    Vbot.home(); 
+    Ottobot.home(); 
 
     //Definition of Gesture Bluetooth commands
     //H  GestureID  
@@ -442,50 +442,50 @@ void receiveGesture(){
     if (arg != NULL) {gesture=atoi(arg);}
     else 
     {
-      Vbot.putMouth(xMouth);
+      Ottobot.putMouth(xMouth);
       delay(2000);
-      Vbot.clearMouth();
+      Ottobot.clearMouth();
     }
 
     switch (gesture) {
       case 1: //H 1 
-        Vbot.playGesture(OttoHappy);
+        Ottobot.playGesture(OttoHappy);
         break;
       case 2: //H 2 
-        Vbot.playGesture(OttoSuperHappy);
+        Ottobot.playGesture(OttoSuperHappy);
         break;
       case 3: //H 3 
-        Vbot.playGesture(OttoSad);
+        Ottobot.playGesture(OttoSad);
         break;
       case 4: //H 4 
-        Vbot.playGesture(OttoSleeping);
+        Ottobot.playGesture(OttoSleeping);
         break;
       case 5: //H 5  
-        Vbot.playGesture(OttoFart);
+        Ottobot.playGesture(OttoFart);
         break;
       case 6: //H 6 
-        Vbot.playGesture(OttoConfused);
+        Ottobot.playGesture(OttoConfused);
         break;
       case 7: //H 7 
-        Vbot.playGesture(OttoLove);
+        Ottobot.playGesture(OttoLove);
         break;
       case 8: //H 8 
-        Vbot.playGesture(OttoAngry);
+        Ottobot.playGesture(OttoAngry);
         break;
       case 9: //H 9  
-        Vbot.playGesture(OttoFretful);
+        Ottobot.playGesture(OttoFretful);
         break;
       case 10: //H 10
-        Vbot.playGesture(OttoMagic);
+        Ottobot.playGesture(OttoMagic);
         break;  
       case 11: //H 11
-        Vbot.playGesture(OttoWave);
+        Ottobot.playGesture(OttoWave);
         break;   
       case 12: //H 12
-        Vbot.playGesture(OttoVictory);
+        Ottobot.playGesture(OttoVictory);
         break; 
       case 13: //H 13
-        Vbot.playGesture(OttoFail);
+        Ottobot.playGesture(OttoFail);
         break;         
       default:
         break;
@@ -499,7 +499,7 @@ void receiveSing(){
 
     //sendAck & stop if necessary
     sendAck();
-    Vbot.home(); 
+    Ottobot.home(); 
 
     //Definition of Sing Bluetooth commands
     //K  SingID    
@@ -515,61 +515,61 @@ void receiveSing(){
 
     switch (sing) {
       case 1: //K 1 
-        Vbot.sing(S_connection);
+        Ottobot.sing(S_connection);
         break;
       case 2: //K 2 
-        Vbot.sing(S_disconnection);
+        Ottobot.sing(S_disconnection);
         break;
       case 3: //K 3 
-        Vbot.sing(S_surprise);
+        Ottobot.sing(S_surprise);
         break;
       case 4: //K 4 
-        Vbot.sing(S_OhOoh);
+        Ottobot.sing(S_OhOoh);
         break;
       case 5: //K 5  
-        Vbot.sing(S_OhOoh2);
+        Ottobot.sing(S_OhOoh2);
         break;
       case 6: //K 6 
-        Vbot.sing(S_cuddly);
+        Ottobot.sing(S_cuddly);
         break;
       case 7: //K 7 
-        Vbot.sing(S_sleeping);
+        Ottobot.sing(S_sleeping);
         break;
       case 8: //K 8 
-        Vbot.sing(S_happy);
+        Ottobot.sing(S_happy);
         break;
       case 9: //K 9  
-        Vbot.sing(S_superHappy);
+        Ottobot.sing(S_superHappy);
         break;
       case 10: //K 10
-        Vbot.sing(S_happy_short);
+        Ottobot.sing(S_happy_short);
         break;  
       case 11: //K 11
-        Vbot.sing(S_sad);
+        Ottobot.sing(S_sad);
         break;   
       case 12: //K 12
-        Vbot.sing(S_confused);
+        Ottobot.sing(S_confused);
         break; 
       case 13: //K 13
-        Vbot.sing(S_fart1);
+        Ottobot.sing(S_fart1);
         break;
       case 14: //K 14
-        Vbot.sing(S_fart2);
+        Ottobot.sing(S_fart2);
         break;
       case 15: //K 15
-        Vbot.sing(S_fart3);
+        Ottobot.sing(S_fart3);
         break;    
       case 16: //K 16
-        Vbot.sing(S_mode1);
+        Ottobot.sing(S_mode1);
         break; 
       case 17: //K 17
-        Vbot.sing(S_mode2);
+        Ottobot.sing(S_mode2);
         break; 
       case 18: //K 18
-        Vbot.sing(S_mode3);
+        Ottobot.sing(S_mode3);
         break;   
       case 19: //K 19
-        Vbot.sing(S_buttonPushed);
+        Ottobot.sing(S_buttonPushed);
         break;                      
       default:
         break;
@@ -584,30 +584,30 @@ void receiveName(){
 
     //sendAck & stop if necessary
     sendAck();
-    Vbot.home(); 
-    Vbot.sing(S_confused); //deny to receive command changing the name. 
+    Ottobot.home(); 
+    Ottobot.sing(S_confused); //deny to receive command changing the name. 
     /*
-    char newVbotName[11] = "";  //Variable to store data read from Serial.
+    char newOttobotName[11] = "";  //Variable to store data read from Serial.
     int eeAddress = 5;          //Location we want the data to be in EEPROM.
     char *arg; 
     arg = SCmd.next(); 
     
     if (arg != NULL) {
 
-      //Complete newVbotName char string
+      //Complete newOttobotName char string
       int k = 0;
       while((*arg) && (k<11)){ 
-          newVbotName[k]=*arg++;
+          newOttobotName[k]=*arg++;
           k++;
       }
       
-      EEPROM.put(eeAddress, newVbotName); 
+      EEPROM.put(eeAddress, newOttobotName); 
     }
     else 
     {
-      //Vbot.putMouth(xMouth);
+      //Ottobot.putMouth(xMouth);
       delay(2000);
-     // Vbot.clearMouth();
+     // Ottobot.clearMouth();
     }
       */
   //  sendFinalAck();
@@ -619,7 +619,7 @@ void receiveLED(){
 
     //sendAck & stop if necessary
     sendAck();
-    Vbot.home();
+    Ottobot.home();
 
     //Examples of receiveLED Bluetooth commands
     //L 000000001000010100100011000000000
@@ -631,31 +631,31 @@ void receiveLED(){
     //Serial.println (arg);
     if (arg != NULL) {
       matrix=strtoul(arg,&endstr,2);    // Converts a char string to unsigned long integer
-      Vbot.putMouth(matrix,false);
+      Ottobot.putMouth(matrix,false);
     }else{
-      Vbot.putMouth(xMouth);
+      Ottobot.putMouth(xMouth);
       delay(2000);
-      Vbot.clearMouth();
+      Ottobot.clearMouth();
     }
 
     sendFinalAck();
 
 }
 
-//-- Function to send Vbot's name
+//-- Function to send Ottobot's name
 void requestName(){
 
-    Vbot.home(); //stop if necessary
+    Ottobot.home(); //stop if necessary
 
-    char actualVbotName[11]= "Zowi";  //Variable to store data read from EEPROM.
+    char actualOttobotName[11]= "Zowi";  //Variable to store data read from EEPROM.
  //   int eeAddress = 5;            //EEPROM address to start reading from
 
     //Get the float data from the EEPROM at position 'eeAddress'
-  //  EEPROM.get(eeAddress, actualVbotName);
+  //  EEPROM.get(eeAddress, actualOttobotName);
 
     BT.print(F("&&"));
     BT.print(F("E "));
-    BT.print(actualVbotName);
+    BT.print(actualOttobotName);
     BT.println(F("%%"));
     BT.flush();
 }
@@ -664,9 +664,9 @@ void requestName(){
 //-- Function to send ultrasonic sensor measure (distance in "cm")
 void requestDistance(){
 
-    Vbot.home();  //stop if necessary  
+    Ottobot.home();  //stop if necessary  
 
-    int distance = Vbot.getDistance();
+    int distance = Ottobot.getDistance();
     BT.print(F("&&"));
     BT.print(F("D "));
     BT.print(distance);
@@ -678,9 +678,9 @@ void requestDistance(){
 //-- Function to send noise sensor measure
 void requestNoise(){
 
-    Vbot.home();  //stop if necessary
+    Ottobot.home();  //stop if necessary
 
-    int microphone= Vbot.getNoise(); //analogRead(PIN_NoiseSensor);
+    int microphone= Ottobot.getNoise(); //analogRead(PIN_NoiseSensor);
     BT.print(F("&&"));
     BT.print(F("N "));
     BT.print(microphone);
@@ -692,10 +692,10 @@ void requestNoise(){
 //-- Function to send battery voltage percent
 void requestBattery(){
 
-    Vbot.home();  //stop if necessary
+    Ottobot.home();  //stop if necessary
 
     //The first read of the batery is often a wrong reading, so we will discard this value. 
-    double batteryLevel = Vbot.getBatteryLevel();
+    double batteryLevel = Ottobot.getBatteryLevel();
 
     BT.print(F("&&"));
     BT.print(F("B "));
@@ -708,7 +708,7 @@ void requestBattery(){
 //-- Function to send program ID
 void requestProgramId(){
 
-    Vbot.home();   //stop if necessary
+    Ottobot.home();   //stop if necessary
 
     BT.print(F("&&"));
     BT.print(F("I "));
@@ -744,14 +744,14 @@ void sendFinalAck(){
 //-- Functions with animatics
 void LowBatteryAlarm(){
 
-    double batteryLevel = Vbot.getBatteryLevel();
+    double batteryLevel = Ottobot.getBatteryLevel();
 
     if(batteryLevel<45){
-      Vbot.bendTones (880, 2000, 1.04, 8, 3);  //A5 = 880
+      Ottobot.bendTones (880, 2000, 1.04, 8, 3);  //A5 = 880
       
       delay(30);
       
-      Vbot.bendTones (2000, 880, 1.02, 8, 3);  //A5 = 880
+      Ottobot.bendTones (2000, 880, 1.02, 8, 3);  //A5 = 880
 
       delay(500);     
     }
