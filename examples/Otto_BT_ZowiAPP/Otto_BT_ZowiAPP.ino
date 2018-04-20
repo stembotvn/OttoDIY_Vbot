@@ -11,8 +11,8 @@
 //SRF04: Echo D9
 //       Trigger D8
 //Servo: D2,D3,D4,D5 
-//HC06   Tx  ----> Rx (D7) Arduino
-//       Rx  ----> Tx (D6) Arduino
+//HC06 (BT_Tx)   Tx  ----> Rx (D6) Arduino 
+//HC06  (BT_Rx)  Rx  ----> Tx (D7) Arduino
 //Sound  A6
 //
 //-----------------------------------------------------------------
