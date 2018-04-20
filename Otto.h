@@ -33,8 +33,8 @@
 #define PIN_Echo    9
 #define PIN_NoiseSensor A6
 ///define Bluetooth in SoftwareSerial 
-#define BT_Rx   6 
-#define BT_Tx   7
+#define BT_Rx   7 
+#define BT_Tx   6
 //define Max7219 pins 
 #define PIN_DIN    10   //max 7219
 #define PIN_CS     11
